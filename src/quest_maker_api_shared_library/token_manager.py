@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 from typing import Any, Optional
 
 import jwt
-from bson import ObjectId
 
 
 class TokenManager:
@@ -30,8 +29,6 @@ class TokenManager:
             self,
             token: str) -> Optional[Any]:
         try:
-            print(f"Decoding token: {token}")
-            print(f"Using key: {self.key}")
             payload = jwt.decode(
                 jwt=token, key=self.key, algorithms=[self.algorithm])
             if payload:
