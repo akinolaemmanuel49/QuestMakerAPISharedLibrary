@@ -3,6 +3,8 @@ from typing import Any, Optional
 
 import jwt
 
+from quest_maker_api_shared_library.errors.authentication import ScopeError, ExpiredTokenError, InvalidTokenError
+
 
 class TokenManager:
     def __init__(self,
@@ -33,12 +35,8 @@ class TokenManager:
                 jwt=token, key=self.key, algorithms=[self.algorithm])
             if payload:
                 return payload
-            raise ValueError(
-                "Scope for the token is invalid."
-            )
+            raise ScopeError(detail=payload['scope'])
         except jwt.ExpiredSignatureError:
-            raise ValueError(
-                "Signature expired. Please re-authenticate.")
+            raise ExpiredTokenError
         except jwt.InvalidTokenError:
-            raise ValueError(
-                "Invalid token. Please log in again.")
+            raise InvalidTokenError
