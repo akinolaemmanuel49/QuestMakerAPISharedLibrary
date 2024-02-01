@@ -4,8 +4,8 @@ class AuthenticationError(Exception):
 
 
 class ScopeError(AuthenticationError):
-    def __init__(self, detail: str) -> None:
-        super().__init__(f'Insufficient scope. Required scope: {detail}')
+    def __init__(self, detail: str = 'Insufficient scope.') -> None:
+        super().__init__(f'{detail}')
 
 
 class ExpiredTokenError(AuthenticationError):
@@ -14,5 +14,5 @@ class ExpiredTokenError(AuthenticationError):
 
 
 class InvalidTokenError(AuthenticationError):
-    def __init__(self, detail: str) -> None:
-        super().__init__(f'Invalid token. Reason: {detail}')
+    def __init__(self, detail: str = 'Invalid token.') -> None:
+        super().__init__(f'{detail}')
