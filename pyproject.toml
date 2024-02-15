@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "quest_maker_api_shared_library"
-version = "1.0.4"
+version = "1.0.5"
 authors = [
     { name = "Akinola Abiodun Emmanuel", email = "akinolaemmanuel49@gmail.com" },
 ]
