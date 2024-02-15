@@ -18,13 +18,16 @@ class TokenManager:
     def encode_token(
             self,
             identifier: Any,
-            scope="create modify:own view:own") -> str:
+            scope="", **kwargs) -> str:
         payload = {
             "exp": datetime.utcnow() + timedelta(minutes=self.jwt_expiration_time_in_minutes),
             "iat": datetime.utcnow(),
             "scope": scope,
             "sub": identifier
         }
+        for key, value in kwargs.items():
+            payload[key] = value
+        
         return jwt.encode(payload=payload, key=self.key, algorithm=self.algorithm)
 
     def decode_token(
